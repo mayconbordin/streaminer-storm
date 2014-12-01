@@ -6,6 +6,7 @@ import backtype.storm.topology.OutputFieldsDeclarer;
 import backtype.storm.topology.base.BaseRichBolt;
 import backtype.storm.tuple.Fields;
 import backtype.storm.tuple.Tuple;
+import java.util.Arrays;
 import java.util.Map;
 
 /**
@@ -26,8 +27,14 @@ public abstract class AbstractBolt extends BaseRichBolt {
         this.collector = collector;
     }
 
-    public void setOutputFields(Fields outputFields) {
+    public AbstractBolt setOutputFields(Fields outputFields) {
         this.outputFields = outputFields;
+        return this;
+    }
+    
+    public AbstractBolt setOutputFields(String... fields) {
+        this.outputFields = new Fields(Arrays.asList(fields));
+        return this;
     }
 
     @Override
